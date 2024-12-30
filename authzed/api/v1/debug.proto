@@ -23,6 +23,9 @@ message DebugInformation {
 
   // schema_used holds the schema used for the request.
   string schema_used = 2;
+
+  // checks holds debug information about the individual checks made in a bulk check request.
+  repeated CheckDebugTrace checks = 3;
 }
 
 // CheckDebugTrace is a recursive trace of the requests made for resolving a CheckPermission
@@ -82,6 +85,10 @@ message CheckDebugTrace {
   // optional_expires_at is the time at which at least one of the relationships used to
   // compute this result, expires (if any). This is *not* related to the caching window.
   google.protobuf.Timestamp optional_expires_at = 10;
+
+  // trace_id is a unique identifier for this trace. This identifier is only guanranteed
+  // to be unique within the same overall Check or CheckBulk operation.
+  string trace_id = 11;
 }
 
 // CaveatEvalInfo holds information about a caveat expression that was evaluated.
